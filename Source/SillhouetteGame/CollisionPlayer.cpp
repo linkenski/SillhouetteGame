@@ -40,7 +40,7 @@ void UCollisionPlayer::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 void UCollisionPlayer::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
 	class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor->ActorHasTag("Spike"))
+	if (OtherActor->ActorHasTag("hazardous"))
 	{
 		GetOwner()->GetActorTransform().SetLocation(startPosition);
 	}
