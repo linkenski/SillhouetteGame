@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CollisionPlayer.h"
+#include "BasicClasses.h"
 
 
 // Sets default values for this component's properties
@@ -21,6 +22,7 @@ void UCollisionPlayer::BeginPlay()
 
 	// ...
 	
+	startPosition = GetOwner()->GetActorLocation;
 }
 
 
@@ -30,5 +32,16 @@ void UCollisionPlayer::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+
+	AActor* owner = GetOwner();	owner->FindComponentByClass<U>();
 }
 
+
+void UCollisionPlayer::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor,
+	class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor->ActorHasTag("hazardous"))
+	{
+		GetOwner()->GetActorTransform().SetLocation(startPosition);
+	}
+}
